@@ -4,41 +4,66 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.epicgamers.obesitygame.scenes.TitleScreen;
+import com.epicgamers.obesitygame.scenes.Game;
+import com.epicgamers.obesitygame.scenes.PauseScreen;
+import com.epicgamers.obesitygame.scenes.SceneEnum.Scene;
 
 public class MainGame extends ApplicationAdapter {
 	
-	private Texture title;
+	private Scene scene;
+	private TitleScreen titleScreen;
+	private Game game;
+	private PauseScreen pause;
+	
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	
 	@Override
 	public void create () {
-		title = new Texture(Gdx.files.internal("title.png"));
-		//title.setScale(3);
+		titleScreen = new TitleScreen();
+		game = new Game();
+		pause = new PauseScreen();
 		
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		
+		scene = Scene.TITLE;
 		batch = new SpriteBatch();
 	}
 
 	@Override
 	public void render () {
-		
-		Gdx.gl.glClearColor(210/255f, 248/255f, 252/255f, 1);
-	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(title, 0, 0, 1280, 720);
-		batch.end();
 		
+		switch(scene) {
+		case TITLE:
+			
+			scene = titleScreen.render(batch);
+			
+			break;
+		case GAME:
+			
+			//placeholder blank screen
+			scene = game.render(batch);
+			
+			break;
+		case PAUSE:
+			
+			//Nothing in the class, also no way to get there
+			scene = pause.render(batch);
+			
+			break;
+		}	
+		
+		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
 		
 	}
+
 }
