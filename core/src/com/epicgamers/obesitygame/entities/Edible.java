@@ -1,9 +1,11 @@
 package com.epicgamers.obesitygame.entities;
 
-public class Edible extends Entity {
+//commented out for the moment because I'm lazy and do not want to update class to match the requirements of entity.java
 
-	public Edible(float x, float y, float width, float height, String src) {
-		super(x, y, width, height, src);
-	}
-	
-}
+//public class Edible extends Entity {
+//
+//	public Edible(float x, float y) {
+//		super(x, y, width, height, src);
+//	}
+//	
+//}
