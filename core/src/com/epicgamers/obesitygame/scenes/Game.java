@@ -43,7 +43,7 @@ public class Game {
 		for (Edible edible : food) {
 			edible.render(batch);
 			
-			System.out.println(player.isColliding(edible));
+			//System.out.println(player.isColliding(edible));
 			
 			//Collision code...
 			if (player.isColliding(edible)) {
@@ -63,6 +63,10 @@ public class Game {
 		font.draw(batch, Integer.toString(player.foodEaten), 20, 720-20);
 		
 		//Conditional returning Scene to change
-		return Scene.GAME;
+		if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+			return Scene.PAUSE;
+		} else {
+			return Scene.GAME;
+		}
 	}
 }

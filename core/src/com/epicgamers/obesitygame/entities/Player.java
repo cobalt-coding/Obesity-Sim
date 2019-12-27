@@ -119,7 +119,7 @@ public class Player extends Entity {
 				batch.draw(idle, x, y, width, height);
 		}else {
 			batch.draw(idle,  x,  y,  width,  height);
-			System.out.println("Error with loading sprites in the Player.java class");
+			//System.out.println("Error with loading sprites in the Player.java class");
 		}
 		
 		x+=velX;
