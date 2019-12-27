@@ -26,8 +26,8 @@ public class Game {
 		player = new Player(100, 100);
 		food = new Array<Edible>();
 		
-		food.add(new Edible(300, 200, 20, 20, "turkey.png", 1, 0));
-		food.add(new Edible(500, 400, 20, 20, "table.png", 1, 1));
+		food.add(new Edible(300, 200, 20, 20, 3, "turkey.png", 1, 0));
+		food.add(new Edible(500, 400, 20, 20, 5, "table.png", 1, 1));
 		
 		font = new BitmapFont();
 	}

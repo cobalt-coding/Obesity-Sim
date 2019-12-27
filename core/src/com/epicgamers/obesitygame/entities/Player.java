@@ -43,7 +43,6 @@ public class Player extends Entity {
 	
 	
 	public void render(Batch batch) {
-		//no actual movement code
 		
 		time += Gdx.graphics.getDeltaTime(); 
 		
