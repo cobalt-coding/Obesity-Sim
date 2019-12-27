@@ -43,7 +43,7 @@ public class Player extends Entity {
 		
 		//Conflicting directional input or no input
 		if((Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-				|| !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
+				|| !Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			
 			batch.draw(idle, x, y, width, height);
 		
@@ -71,7 +71,13 @@ public class Player extends Entity {
 			
 		}
 		
-		if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		if((Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+				|| !Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+			
+			batch.draw(idle, x, y, width, height);
+		
+		//going right
+		}else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			
 			time += Gdx.graphics.getDeltaTime();
 			batch.draw(currentFrame, x, y, width, height);
