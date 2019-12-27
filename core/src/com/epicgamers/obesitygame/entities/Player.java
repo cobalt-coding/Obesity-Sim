@@ -43,7 +43,7 @@ public class Player extends Entity {
 		
 		//Conflicting directional input or no input
 		if((Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-				|| (!Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))){
+				|| !Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)){
 			
 			batch.draw(idle, x, y, width, height);
 		
