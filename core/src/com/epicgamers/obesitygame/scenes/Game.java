@@ -26,9 +26,14 @@ public class Game {
 		player = new Player(100, 100);
 		food = new Array<Edible>();
 		
+		food.add(new Edible(400, 600, 56, 33, "table.png", 1, false, 1));
+		food.add(new Edible(200, 300, 42, 32, "turkey.png", 1, false, 0));
+		
+		/*
 		for (int i = 0 ; i < 5 ; i++) {
 			food.add(new Edible((float)Math.random()*1280, (float)Math.random()*720, 20, 20, "food.png", 10));
 		}
+		*/
 		font = new BitmapFont();
 	}
 	
@@ -41,13 +46,17 @@ public class Game {
 		player.render(batch);
 		
 		for (Edible edible : food) {
-			edible.render(batch);
-			
-			//System.out.println(player.isColliding(edible));
-			
-			//Collision code...
-			if (player.isColliding(edible)) {
-				player.foodEaten+=edible.foodValue;
+			if(!edible.isEaten) {
+				edible.render(batch);
+				
+				//Collision code...
+				if(player.foodEaten >= edible.foodValReq) {
+					if (player.isColliding(edible)) {
+						player.foodEaten+=edible.foodValue;
+						//Destroy food after eaten
+						edible.isEaten = true;
+					}
+				}
 			}
 		}
 		
