@@ -13,7 +13,7 @@ public class Entity {
 	
 	Animation<TextureRegion> walkCycle;
 	TextureRegion idle;
-	private Rectangle rectangle;
+	protected Rectangle rectangle;
 	private Texture spriteSheet;
 	
 	public Entity(float x, float y, float width, float height, String src, int columns, int rows, float timeBetweenFrames, int walkFrames) {
@@ -49,7 +49,7 @@ public class Entity {
 	}
 	
 	public boolean colliding(Rectangle r) {
-		return rectangle.contains(r);
+		return rectangle.overlaps(r);
 	}
 	
 }

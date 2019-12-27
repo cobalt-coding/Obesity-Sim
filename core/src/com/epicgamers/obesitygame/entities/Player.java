@@ -34,7 +34,7 @@ public class Player extends Entity {
 	}
 	
 	public boolean isColliding(Entity e) {
-		return this.getRect().overlaps(e.getRect());
+		return colliding(e.getRect());
 	}
 	
 	
@@ -96,6 +96,9 @@ public class Player extends Entity {
 		
 		x+=velX;
 		y+=velY;
+		
+		rectangle.x = x;
+		rectangle.y = y;
 		
 		velX/=FRICTION;
 		velY/=FRICTION;

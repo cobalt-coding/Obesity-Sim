@@ -24,7 +24,6 @@ public class Game {
 	public Game() {
 		//initialize texture
 		player = new Player(100, 100);
-		foodTest = new Edible(20, 20, 20, 20, "food.png", 10);
 		food = new Array<Edible>();
 		
 		for (int i = 0 ; i < 5 ; i++) {
@@ -40,12 +39,11 @@ public class Game {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		player.render(batch);
-		foodTest.render(batch);
 		
 		for (Edible edible : food) {
 			edible.render(batch);
-			System.out.println(edible.getRect().getWidth());
-			//System.out.println(player.isColliding(edible));
+			
+			System.out.println(player.isColliding(edible));
 			
 			//Collision code...
 			if (player.isColliding(edible)) {
