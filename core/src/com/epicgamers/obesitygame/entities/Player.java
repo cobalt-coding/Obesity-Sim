@@ -122,9 +122,12 @@ public class Player extends Entity {
 			//System.out.println("Error with loading sprites in the Player.java class");
 		}
 		
-		x+=velX;
-		y+=velY;
+		if(x + velX <= 1280 - width && x + velX >= 0)
+			x+=velX;	
 		
+		if(y + velY <= 720 - height && y + velY >= 0 )
+			y+=velY;
+			
 		rectangle.x = x;
 		rectangle.y = y;
 		
