@@ -1,11 +1,17 @@
 package com.epicgamers.obesitygame.entities;
 
-//commented out for the moment because I'm lazy and do not want to update class to match the requirements of entity.java
+import com.badlogic.gdx.graphics.g2d.Batch;
 
-//public class Edible extends Entity {
-//
-//	public Edible(float x, float y) {
-//		super(x, y, width, height, src);
-//	}
-//	
-//}
+public class Edible extends Entity {
+	
+	public Edible(float x, float y, float width, float height, String src) {
+		super(x, y, width, height, src, 1, 1, 0, 0);
+	}
+	
+	public void render(Batch batch) {
+		
+		batch.draw(idle, this.getRect().x, this.getRect().y);
+		
+	}
+	
+}
