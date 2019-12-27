@@ -20,6 +20,8 @@ public class Player extends Entity {
 	float velX = 0, velY = 0;
 	final float SPEED = 60, FRICTION = 1.1f;
 	
+	public int foodEaten = 0;
+	
 	boolean moving = false;
 	
 	public Player(float x, float y) {
@@ -32,7 +34,7 @@ public class Player extends Entity {
 	}
 	
 	public boolean isColliding(Entity e) {
-		return this.getRect().contains(e.getRect());
+		return this.getRect().overlaps(e.getRect());
 	}
 	
 	

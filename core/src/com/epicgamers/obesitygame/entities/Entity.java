@@ -48,4 +48,8 @@ public class Entity {
 		return rectangle;
 	}
 	
+	public boolean colliding(Rectangle r) {
+		return rectangle.contains(r);
+	}
+	
 }

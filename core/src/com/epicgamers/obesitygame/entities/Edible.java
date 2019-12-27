@@ -4,8 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Edible extends Entity {
 	
-	public Edible(float x, float y, float width, float height, String src) {
+	public int foodValue;
+	
+	public Edible(float x, float y, float width, float height, String src, int foodValue) {
 		super(x, y, width, height, src, 1, 1, 0, 0);
+		this.foodValue = foodValue;
 	}
 	
 	public void render(Batch batch) {
