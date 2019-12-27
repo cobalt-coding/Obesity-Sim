@@ -17,6 +17,9 @@ public class Player extends Entity {
 	float time;
 	float x = 50, y = 50;
 	
+	float velX = 0, velY = 0;
+	final float SPEED = 60, FRICTION = 1.1f;
+	
 	public Player(float x, float y) {
 		//the constructor should be self-explanatory if you look at the parameter names
 		super(x, y, width, height, src, cols, rows, 0.2f, walkFrames);
@@ -52,6 +55,8 @@ public class Player extends Entity {
 				currentFrame.flip(true, false);
 			}
 			batch.draw(currentFrame, x, y, width, height);
+			
+			velX+=SPEED*Gdx.graphics.getDeltaTime();
 		
 		//going left
 		} else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -62,7 +67,32 @@ public class Player extends Entity {
 			}
 			batch.draw(currentFrame, x, y, width, height);
 			
-		}	
+			velX-=SPEED*Gdx.graphics.getDeltaTime();
+			
+		}
+		
+		if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			
+			time += Gdx.graphics.getDeltaTime();
+			batch.draw(currentFrame, x, y, width, height);
+			
+			velY+=SPEED*Gdx.graphics.getDeltaTime();
+			
+		} else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			
+			time += Gdx.graphics.getDeltaTime();
+			batch.draw(currentFrame, x, y, width, height);
+			
+			velY-=SPEED*Gdx.graphics.getDeltaTime();
+			
+		}
+		
+		x+=velX;
+		y+=velY;
+		
+		velX/=FRICTION;
+		velY/=FRICTION;
+		
 	}
 	
 }
