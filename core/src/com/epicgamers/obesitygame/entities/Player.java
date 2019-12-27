@@ -23,6 +23,8 @@ public class Player extends Entity {
 	public int foodEaten = 0;
 	
 	boolean moving = false;
+	boolean movingRightLast = true;
+	boolean spriteRight = true;
 	
 	public Player(float x, float y) {
 		//the constructor should be self-explanatory if you look at the parameter names
@@ -51,8 +53,10 @@ public class Player extends Entity {
 			time += Gdx.graphics.getDeltaTime(); 
 			if(currentFrame.isFlipX()) {
 				currentFrame.flip(true, false);
+				spriteRight = true;
 			}
 			moving = true;
+			movingRightLast = true;
 			
 			velX+=SPEED*Gdx.graphics.getDeltaTime();
 		
@@ -62,8 +66,10 @@ public class Player extends Entity {
 			time += Gdx.graphics.getDeltaTime(); 
 			if(!currentFrame.isFlipX()) {
 				currentFrame.flip(true, false);
+				spriteRight = false;
 			}
 			moving = true;
+			movingRightLast = false;
 			
 			velX-=SPEED*Gdx.graphics.getDeltaTime();
 			
@@ -89,10 +95,18 @@ public class Player extends Entity {
 			moving = false;
 		}
 		
-		if(moving)
+		if(moving) {
 			batch.draw(currentFrame, x, y, width, height);
-		else
+		}else if(spriteRight && movingRightLast) {
 			batch.draw(idle, x, y, width, height);
+		}else if(!spriteRight && !movingRightLast){
+			idle.flip(true, false);
+			batch.draw(idle, x, y, width, height);
+			idle.flip(true, false);
+		} else {
+			batch.draw(idle,  x,  y,  width,  height);
+			System.out.println("Error with loading sprites in the Player.java class");
+		}
 		
 		x+=velX;
 		y+=velY;
