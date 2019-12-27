@@ -6,16 +6,18 @@ public class Edible extends Entity {
 	
 	public int foodValue;
 	public int foodValReq;
+	float scaler;
 	
-	public Edible(float x, float y, float width, float height, String src, int foodValue, int foodValReq) {
+	public Edible(float x, float y, float width, float height, float scaler, String src, int foodValue, int foodValReq) {
 		super(x, y, width, height, src, 1, 1, 0, 0);
 		this.foodValue = foodValue;
 		this.foodValReq = foodValReq;
+		this.scaler = scaler;
 	}
 	
 	public void render(Batch batch) {
 		
-		batch.draw(idle, this.getRect().x, this.getRect().y);
+		batch.draw(idle, this.getRect().x, this.getRect().y, getRect().width * scaler, getRect().height * scaler);
 		
 	}
 	
