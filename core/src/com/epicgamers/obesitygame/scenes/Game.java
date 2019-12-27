@@ -26,8 +26,8 @@ public class Game {
 		player = new Player(100, 100);
 		food = new Array<Edible>();
 		
-		for (int i = 0 ; i < 5 ; i++) {
-			food.add(new Edible((float)Math.random()*1280, (float)Math.random()*720, 20, 20, "food.png", 10));
+		for (int i = 0 ; i < 7 ; i++) {
+			food.add(new Edible((float)Math.random()*1280, (float)Math.random()*720, 20, 20, "tile00" + i + ".png", 10));
 		}
 		font = new BitmapFont();
 	}
@@ -40,25 +40,26 @@ public class Game {
 		
 		player.render(batch);
 		
-		for (Edible edible : food) {
-			edible.render(batch);
-			
-			//System.out.println(player.isColliding(edible));
-			
-			//Collision code...
-			if (player.isColliding(edible)) {
-				player.foodEaten+=edible.foodValue;
-			}
-		}
-		
-//		for (Iterator<Edible> iter = food.iterator() ; iter.hasNext();) {
-//			Edible edible = iter.next();
-//			//System.out.println(player.colliding(edible.getRect()));
+//		for (Edible edible : food) {
 //			edible.render(batch);
-//			if (player.colliding(edible.getRect())) {
-//				System.out.println("wowee");
+//			
+//			//System.out.println(player.isColliding(edible));
+//			
+//			//Collision code...
+//			if (player.isColliding(edible)) {
+//				player.foodEaten+=edible.foodValue;
 //			}
 //		}
+		
+		for (Iterator<Edible> iter = food.iterator() ; iter.hasNext();) {
+			Edible edible = iter.next();
+			//System.out.println(player.colliding(edible.getRect()));
+			edible.render(batch);
+			if (player.colliding(edible.getRect())) {
+				player.foodEaten+=edible.foodValue;
+				iter.remove();
+			}
+		}
 		
 		font.draw(batch, Integer.toString(player.foodEaten), 20, 720-20);
 		
