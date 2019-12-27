@@ -22,6 +22,7 @@ public class Player extends Entity {
 	final float SPEED = 60, FRICTION = 1.1f;
 	
 	public int foodEaten = 0;
+	public int hunger = 0;
 	
 	boolean movingHorizontal = false;
 	boolean movingVertical = false;
@@ -43,7 +44,6 @@ public class Player extends Entity {
 	
 	
 	public void render(Batch batch) {
-		//no actual movement code
 		
 		time += Gdx.graphics.getDeltaTime(); 
 		
@@ -52,7 +52,6 @@ public class Player extends Entity {
 		oldVelX = velX;
 		oldVelY = velY;
 		
-		//Conflicting directional input or no input
 		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT) ) {
 			
 			time += Gdx.graphics.getDeltaTime(); 
