@@ -26,9 +26,9 @@ public class Game {
 		player = new Player(100, 100);
 		food = new Array<Edible>();
 		
-		for (int i = 0 ; i < 7 ; i++) {
-			food.add(new Edible((float)Math.random()*1280, (float)Math.random()*720, 20, 20, "tile00" + i + ".png", 10));
-		}
+		food.add(new Edible(300, 200, 20, 20, "turkey.png", 1, 0));
+		food.add(new Edible(500, 400, 20, 20, "table.png", 1, 1));
+		
 		font = new BitmapFont();
 	}
 	
@@ -56,8 +56,10 @@ public class Game {
 			//System.out.println(player.colliding(edible.getRect()));
 			edible.render(batch);
 			if (player.colliding(edible.getRect())) {
-				player.foodEaten+=edible.foodValue;
-				iter.remove();
+				if(edible.foodValReq <= player.foodEaten) {
+					player.foodEaten+=edible.foodValue;
+					iter.remove();
+				}
 			}
 		}
 		
