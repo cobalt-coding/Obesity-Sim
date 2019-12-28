@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
 import com.epicgamers.obesitygame.entities.Edible;
+import com.epicgamers.obesitygame.entities.Graphic;
 import com.epicgamers.obesitygame.entities.Player;
 import com.epicgamers.obesitygame.scenes.SceneEnum.Scene;
 
@@ -20,11 +21,38 @@ public class Game {
 	Edible foodTest;
 	private Array<Edible> food;
 	BitmapFont font;
+	private Array<Graphic> graphics;
+	
+	private String[] graphicLayout = new String[] {
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+		"                    ",
+	};
 	
 	public Game() {
 		//initialize texture
 		player = new Player(100, 100);
 		food = new Array<Edible>();
+		
+		graphics = new Array<Graphic>();
+		
+		int index = 0;
+		for (String row : graphicLayout) {
+			for (int i = 0 ; i < row.length() ; i++) {
+				//System.out.println(i);
+				graphics.add(new Graphic(i*64, index*64, 32, 32, 2, "wood.png"));
+			}
+			index++;
+		}
 		
 		food.add(new Edible(300, 200, 20, 20, 3, "turkey.png", 1, 0));
 		food.add(new Edible(500, 400, 20, 20, 5, "table.png", 1, 1));
@@ -37,6 +65,10 @@ public class Game {
 		//Regular use for rendering (no need to worry about batch.begin() or batch.end)
 		Gdx.gl.glClearColor(210/255f, 248/255f, 252/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		for (Graphic graphic : graphics) {
+			graphic.render(batch);
+		}
 		
 		player.render(batch);
 		
