@@ -5,9 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Graphic extends Entity {
 	
 	private float scaler;
+	static int[] frames = {0};
 	
 	public Graphic(float x, float y, float width, float height, float scaler, String src) {
-		super(x, y, width, height, src, 1, 1, 0, 0);
+		super(x, y, width, height, src, 1, 1, 0, frames);
 		this.scaler = scaler;
 	}
 	

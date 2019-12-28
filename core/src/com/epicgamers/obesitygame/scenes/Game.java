@@ -89,7 +89,9 @@ public class Game {
 			edible.render(batch);
 			if (player.colliding(edible.getRect())) {
 				if(edible.foodValReq <= player.foodEaten) {
+					player.time = 0;
 					player.foodEaten+=edible.foodValue;
+					player.eating = true;
 					iter.remove();
 				}
 			}
