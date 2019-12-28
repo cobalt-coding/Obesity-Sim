@@ -17,7 +17,7 @@ public class MainGame extends ApplicationAdapter {
 	private Game game;
 	private PauseScreen pause;
 	
-	private OrthographicCamera camera;
+	public OrthographicCamera camera;
 	private SpriteBatch batch;
 	
 	@Override
@@ -37,7 +37,7 @@ public class MainGame extends ApplicationAdapter {
 	public void render () {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
+
 		switch(scene) {
 		case TITLE:
 			
@@ -46,17 +46,17 @@ public class MainGame extends ApplicationAdapter {
 			break;
 		case GAME:
 			
-			//placeholder blank screen
-			scene = game.render(batch);
+			scene = game.render(batch, camera);
 			
 			break;
 		case PAUSE:
 			
-			//Nothing in the class, also no way to get there
 			scene = pause.render(batch);
 			
 			break;
 		}	
+		
+		
 		
 		batch.end();
 	}

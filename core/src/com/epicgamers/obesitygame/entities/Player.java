@@ -12,7 +12,8 @@ public class Player extends Entity {
 	//walkframes does not include the idle right now, can change later if unsatisfactory
 	static int cols = 4, rows = 3;
 	static int[] animationsFrames = {3, 7};
-	static float width = 34*2, height = 51*2;
+	public static float width = 34*2;
+	public static float height = 51*2;
 	static String src = "Epic dude.png";
 	
 	
