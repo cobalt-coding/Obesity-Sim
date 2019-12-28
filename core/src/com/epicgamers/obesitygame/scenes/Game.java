@@ -100,7 +100,7 @@ public class Game {
 		font.draw(batch, Integer.toString(player.foodEaten), 20, 720-20);
 		
 		//Conditional returning Scene to change
-		if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+		if(Gdx.input.isKeyJustPressed(Input.Keys.P) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			return Scene.PAUSE;
 		} else {
 			return Scene.GAME;
