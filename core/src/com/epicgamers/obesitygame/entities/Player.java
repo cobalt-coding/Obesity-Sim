@@ -104,14 +104,14 @@ public class Player extends Entity {
 			time += Gdx.graphics.getDeltaTime();
 			movingVertical = true;
 
-			velY+=SPEED*Gdx.graphics.getDeltaTime();
+			velY+=SPEED*Gdx.graphics.getDeltaTime()*zoom;
 
 		} else if(Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP)) {
 
 			time += Gdx.graphics.getDeltaTime();
-			movingVertical = true;
+			movingVertical = true;	
 
-			velY-=SPEED*Gdx.graphics.getDeltaTime();
+			velY-=SPEED*Gdx.graphics.getDeltaTime()*zoom;
 
 		} else if (!Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)){
 			movingVertical = false;
