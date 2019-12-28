@@ -32,6 +32,11 @@ public class Player extends Entity {
 	boolean movingRightLast = true;
 	boolean spriteRight = true;
 	
+	int leftLimit = 0;
+	int rightLimit = 1280;
+	int downLimit = 0;
+	int upLimit = 720;
+	
 	public Player(float x, float y) {
 		//the constructor should be self-explanatory if you look at the parameter names
 		super(x, y, width, height, src, cols, rows, 0.2f, animationsFrames);
@@ -129,10 +134,10 @@ public class Player extends Entity {
 			//System.out.println("Error with loading sprites in the Player.java class");
 		}
 		
-		if(x + velX <= 1280 - width && x + velX >= 0)
+		if(x + velX <= rightLimit - width && x + velX >= leftLimit)
 			x+=velX;	
 		
-		if(y + velY <= 720 - height && y + velY >= 0 )
+		if(y + velY <= upLimit - height && y + velY >= downLimit )
 			y+=velY;
 			
 		rectangle.x = x;

@@ -74,8 +74,20 @@ public class Game {
 			index++;
 		}
 		
-		food.add(new Edible(300, 200, 20, 20, 3, "turkey.png", 1, 0));
-		food.add(new Edible(500, 400, 20, 20, 5, "table.png", 1, 1));
+		//First screen
+		food.add(new Edible(400, 200, 56, 33, 3, "table.png", 1, 4));
+		food.add(new Edible(600, 400, 42, 32, 2, "turkey.png", 1, 0));
+		food.add(new Edible(520, 420, 34, 29, 1.5f, "bakedPotato.png", 1, 0));
+		food.add(new Edible(430, 400, 40, 37, 1.5f, "corn.png", 1, 0));
+		food.add(new Edible(800, 430, 22, 16, 2, "rice.png", 1, 0));
+		
+		//Second screen
+		food.add(new Edible(-768, 1008, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-896, 576, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-1024, 144, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-1152, -228, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-1280, -720, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		
 		
 		font = new BitmapFont();
 	}
@@ -133,10 +145,10 @@ public class Game {
 				desiredZoom = 5;
 				desiredWidth = lastWidth*5;
 				desiredHeight = lastHeight*5;
-			} else if(player.foodEaten >= 2){
-				desiredZoom = 2;
-				desiredWidth = lastWidth*2;
-				desiredHeight = lastHeight*2;
+			} else if(player.foodEaten >= 5){
+				desiredZoom = 3;
+				desiredWidth = lastWidth*3;
+				desiredHeight = lastHeight*3;
 			} else {
 				desiredZoom = 1;
 				desiredWidth = originalPlayerWidth;
