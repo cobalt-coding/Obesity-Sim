@@ -6,11 +6,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Array;
-import com.epicgamers.obesitygame.MainGame;
+//import com.epicgamers.obesitygame.MainGame;
 import com.epicgamers.obesitygame.entities.Edible;
 import com.epicgamers.obesitygame.entities.Graphic;
 import com.epicgamers.obesitygame.entities.Player;
@@ -37,6 +37,12 @@ public class Game {
 	float originalPlayerHeight = player.height;
 	float lastHeight = player.height;
 	float desiredHeight = player.height;
+	
+	float visibleWidth = 1280;
+	float visibleHeight = 720;
+	
+	final int centerOfScreenX = 1280/2;
+	final int centerOfScreenY = 720/2;
 	
 	private String[] graphicLayout = new String[] {
 		"                    ",
@@ -129,7 +135,10 @@ public class Game {
 			}
 		}
 		
-		font.draw(batch, Integer.toString(player.foodEaten), 20, 720-20);
+		visibleWidth = cam.viewportWidth*cam.zoom;
+		visibleHeight = cam.viewportHeight*cam.zoom;
+		
+		font.draw(batch, Integer.toString(player.foodEaten), (float)(((desiredZoom*1280-1280)/2)+(0.05*visibleWidth)), (float)(((desiredZoom*720-720)/2)+(0.95*visibleHeight)));
 		
 		/*
 		 * For adding more zooming states:
@@ -159,6 +168,10 @@ public class Game {
 		//Smoothly handles zooming and changing width and height. Don't need to mess with this if we're just adding new stages of zooming
 		if(cam.zoom < desiredZoom) {
 			cam.zoom += 0.01*(desiredZoom - lastZoom);
+			if((cam.zoom + 0.01*(desiredZoom - lastZoom)) > desiredZoom) {
+				cam.zoom = desiredZoom;
+			}
+			player.zoom += 0.01*(desiredZoom - lastZoom); //Makes the player movement scale with the camera
 			zooming = true;
 		} else {
 			zooming = false;
@@ -179,6 +192,11 @@ public class Game {
 		}
 		
 		cam.update();
+		
+		player.leftLimit = (int)(centerOfScreenX - (visibleWidth/2));
+		player.rightLimit = (int)(centerOfScreenX + (visibleWidth/2));
+		player.downLimit = (int)(centerOfScreenY - (visibleHeight/2));
+		player.upLimit = (int)(centerOfScreenY + (visibleHeight/2));
 		
 		//Conditional returning Scene to change
 		if(Gdx.input.isKeyJustPressed(Input.Keys.P) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {

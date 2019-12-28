@@ -5,6 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.epicgamers.obesitygame.MainGame;
+import com.epicgamers.obesitygame.scenes.Game;
 
 public class Player extends Entity {
 	
@@ -32,10 +35,12 @@ public class Player extends Entity {
 	boolean movingRightLast = true;
 	boolean spriteRight = true;
 	
-	int leftLimit = 0;
-	int rightLimit = 1280;
-	int downLimit = 0;
-	int upLimit = 720;
+	public int leftLimit = 0;
+	public int rightLimit = 1280;
+	public int downLimit = 0;
+	public int upLimit = 720;
+	
+	public float zoom = 1;
 	
 	public Player(float x, float y) {
 		//the constructor should be self-explanatory if you look at the parameter names
@@ -75,7 +80,7 @@ public class Player extends Entity {
 			movingHorizontal = true;
 			movingRightLast = true;
 
-			velX+=SPEED*Gdx.graphics.getDeltaTime();
+			velX+=SPEED*Gdx.graphics.getDeltaTime()*zoom;
 
 			//going left
 		} else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -88,7 +93,7 @@ public class Player extends Entity {
 			movingHorizontal = true;
 			movingRightLast = false;
 
-			velX-=SPEED*Gdx.graphics.getDeltaTime();
+			velX-=SPEED*Gdx.graphics.getDeltaTime()*zoom;
 
 		}else if(!Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) { //If neither are pressed
 			movingHorizontal = false;
