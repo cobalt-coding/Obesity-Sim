@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -19,6 +20,10 @@ public class PauseScreen {
 	Texture fontTexture;
 	SpriteBatch batch;
 	BitmapFont font;
+	
+	boolean zoomReset = false;
+	float originalZoom = 1.0f;
+	
 	//FreeTypeFontGenerator font;
 	
 		public PauseScreen() {
@@ -33,14 +38,19 @@ public class PauseScreen {
 	        //font = new BitmapFont(Gdx.files.internal("MontserratRegular.ttf"), new TextureRegion(fontTexture), false);
 		}
 		
-		public Scene render(Batch batch) {
+		public Scene render(Batch batch, OrthographicCamera cam) {
 			
 			//Regular use for rendering (no need to worry about batch.begin() or batch.end)
 			Gdx.gl.glClearColor(210/255f, 248/255f, 252/255f, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
-			//batch.draw(pause, 0, 0);
-			
+			if(!zoomReset) {
+				originalZoom = cam.zoom;
+				cam.zoom = 1;
+				cam.update();
+				zoomReset = true;
+			}
+
 			if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
 				int mouseX = Gdx.input.getX();
 				int mouseY = Gdx.input.getY();
@@ -65,6 +75,8 @@ public class PauseScreen {
 			//Conditional returning scene to change
 			
 			if(Gdx.input.isKeyJustPressed(Input.Keys.P) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+				cam.zoom = originalZoom;
+				zoomReset = false;
 				return Scene.GAME;
 			} else {
 				return Scene.PAUSE;

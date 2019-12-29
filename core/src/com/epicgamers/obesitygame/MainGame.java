@@ -41,7 +41,7 @@ public class MainGame extends ApplicationAdapter {
 		switch(scene) {
 		case TITLE:
 			
-			scene = titleScreen.render(batch);
+			scene = titleScreen.render(batch, camera);
 			
 			break;
 		case GAME:
@@ -51,7 +51,7 @@ public class MainGame extends ApplicationAdapter {
 			break;
 		case PAUSE:
 			
-			scene = pause.render(batch);
+			scene = pause.render(batch, camera);
 			
 			break;
 		}	
