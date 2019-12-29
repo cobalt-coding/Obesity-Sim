@@ -14,7 +14,7 @@ public class Player extends Entity {
 	//change as we change sprites, also make sure frames are even, otherwise you will have blank frames
 	//walkframes does not include the idle right now, can change later if unsatisfactory
 	static int cols = 4, rows = 3;
-	static int[] animationsFrames = {3, 7};
+	static int[] animationsFrames = {4, 6};
 	public static float width = 34*2;
 	public static float height = 51*2;
 	static String src = "Epic dude.png";
