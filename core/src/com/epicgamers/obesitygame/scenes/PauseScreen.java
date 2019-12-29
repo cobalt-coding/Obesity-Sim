@@ -53,6 +53,8 @@ public class PauseScreen {
 				int mouseX = Gdx.input.getX();
 				int mouseY = Gdx.input.getY();
 				if(320 < mouseX && mouseX < 950 && 140 < mouseY && mouseY < 240) {
+					cam.zoom = originalZoom;
+					zoomReset = false;
 					return Scene.GAME;
 				} else if(320 < mouseX && mouseX < 950 && 320 < mouseY && mouseY < 420) {
 					return Scene.CREDITS;

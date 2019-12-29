@@ -26,7 +26,7 @@ public class TitleScreen {
 		batch.draw(title, 0, 0, 1280, 720);
 		
 		//return false if any button is pressed
-		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
 			return Scene.GAME;
 		}else {
 			return Scene.TITLE;
