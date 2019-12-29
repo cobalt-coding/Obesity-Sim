@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.epicgamers.obesitygame.MainGame;
 import com.epicgamers.obesitygame.scenes.Game;
@@ -56,7 +58,7 @@ public class Player extends Entity {
 	}
 	
 	
-	public void render(Batch batch) {
+	public void render(Batch batch, ShapeRenderer shape) {
 		
 		time += Gdx.graphics.getDeltaTime(); 
 		

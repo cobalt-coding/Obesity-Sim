@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.epicgamers.obesitygame.scenes.TitleScreen;
 import com.epicgamers.obesitygame.scenes.CreditsScreen;
 import com.epicgamers.obesitygame.scenes.Game;
@@ -21,6 +22,7 @@ public class MainGame extends ApplicationAdapter {
 	
 	public OrthographicCamera camera;
 	private SpriteBatch batch;
+	private ShapeRenderer shape;
 	
 	@Override
 	public void create () {
@@ -34,11 +36,13 @@ public class MainGame extends ApplicationAdapter {
 		
 		scene = Scene.TITLE;
 		batch = new SpriteBatch();
+		shape = new ShapeRenderer();
 	}
 
 	@Override
 	public void render () {
 		batch.setProjectionMatrix(camera.combined);
+		shape.setProjectionMatrix(camera.combined);
 		batch.begin();
 
 		switch(scene) {
@@ -49,7 +53,7 @@ public class MainGame extends ApplicationAdapter {
 			break;
 		case GAME:
 			
-			scene = game.render(batch, camera);
+			scene = game.render(batch, camera, shape);
 			
 			break;
 		case PAUSE:

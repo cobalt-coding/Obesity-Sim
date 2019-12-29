@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 //import com.epicgamers.obesitygame.MainGame;
 import com.epicgamers.obesitygame.entities.Edible;
@@ -84,24 +85,24 @@ public class Game {
 		}
 		
 		//First screen
-		food.add(new Edible(400, 200, 56, 33, 3, "table.png", 1, 4));
-		food.add(new Edible(600, 400, 42, 32, 2, "turkey.png", 1, 0));
-		food.add(new Edible(520, 420, 34, 29, 1.5f, "bakedPotato.png", 1, 0));
-		food.add(new Edible(430, 400, 40, 37, 1.5f, "corn.png", 1, 0));
-		food.add(new Edible(800, 430, 22, 16, 2, "rice.png", 1, 0));
+		food.add(new Edible(400, 200, 56, 33, 9, "table.png", 1, 4)); //3
+		food.add(new Edible(600, 400, 42, 32, 4, "turkey.png", 1, 0)); //2
+		food.add(new Edible(520, 420, 34, 29, 2.3f, "bakedPotato.png", 1, 0)); //1.5
+		food.add(new Edible(430, 400, 40, 37, 2.3f, "corn.png", 1, 0)); //1.5
+		food.add(new Edible(800, 430, 22, 16, 4, "rice.png", 1, 0)); //2
 		
 		//Second screen
 		//food.add(new Edible(-768, 1008, 15, 32, 4.5f, "candyCane.png", 1, 5));
-		food.add(new Edible(-896, 576, 15, 32, 4.5f, "candyCane.png", 1, 5));
-		food.add(new Edible(-1024, 144, 15, 32, 4.5f, "candyCane.png", 1, 5));
-		food.add(new Edible(-1152, -228, 15, 32, 4.5f, "candyCane.png", 1, 5));
-		food.add(new Edible(-1279, -719, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-896, 576, 15, 32, 20, "candyCane.png", 1, 5));
+		food.add(new Edible(-1024, 144, 15, 32, 20, "candyCane.png", 1, 5));
+		food.add(new Edible(-1152, -228, 15, 32, 20, "candyCane.png", 1, 5));
+		food.add(new Edible(-1279, -719, 15, 32, 20, "candyCane.png", 1, 5));
 		
 		
 		font = new BitmapFont();
 	}
 	
-	public Scene render(Batch batch, OrthographicCamera cam) {
+	public Scene render(Batch batch, OrthographicCamera cam, ShapeRenderer shape) {
 		
 		//Regular use for rendering (no need to worry about batch.begin() or batch.end)
 		Gdx.gl.glClearColor(210/255f, 248/255f, 252/255f, 1);
@@ -111,7 +112,7 @@ public class Game {
 			graphic.render(batch);
 		}
 		
-		player.render(batch);
+		player.render(batch, shape);
 		
 //		for (Edible edible : food) {
 //			edible.render(batch);
@@ -127,7 +128,7 @@ public class Game {
 		for (Iterator<Edible> iter = food.iterator() ; iter.hasNext();) {
 			Edible edible = iter.next();
 			//System.out.println(player.colliding(edible.getRect()));
-			edible.render(batch);
+			edible.render(batch, shape);
 			if (player.colliding(edible.getRect())) {
 				if(edible.foodValReq <= player.foodEaten) {
 					eatSound.play();
