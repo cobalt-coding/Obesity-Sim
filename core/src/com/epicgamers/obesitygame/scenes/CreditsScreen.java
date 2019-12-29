@@ -15,7 +15,7 @@ public class CreditsScreen {
 	
 	public CreditsScreen() {
 		//initializing textures
-		credits = new Texture(Gdx.files.internal("badlogic.jpg"));
+		credits = new Texture(Gdx.files.internal("credits.png"));
 	}
 	
 	public Scene render(Batch batch) {
@@ -26,7 +26,7 @@ public class CreditsScreen {
 		batch.draw(credits, 0, 0, 1280, 720);
 		
 		//return false if any button is pressed
-		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+		if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY) || Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 			return Scene.PAUSE;
 		}else {
 			return Scene.CREDITS;
