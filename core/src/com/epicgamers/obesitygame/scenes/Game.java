@@ -88,11 +88,11 @@ public class Game {
 		food.add(new Edible(800, 430, 22, 16, 2, "rice.png", 1, 0));
 		
 		//Second screen
-		food.add(new Edible(-768, 1008, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		//food.add(new Edible(-768, 1008, 15, 32, 4.5f, "candyCane.png", 1, 5));
 		food.add(new Edible(-896, 576, 15, 32, 4.5f, "candyCane.png", 1, 5));
 		food.add(new Edible(-1024, 144, 15, 32, 4.5f, "candyCane.png", 1, 5));
 		food.add(new Edible(-1152, -228, 15, 32, 4.5f, "candyCane.png", 1, 5));
-		food.add(new Edible(-1280, -720, 15, 32, 4.5f, "candyCane.png", 1, 5));
+		food.add(new Edible(-1279, -719, 15, 32, 4.5f, "candyCane.png", 1, 5));
 		
 		
 		font = new BitmapFont();
@@ -139,7 +139,7 @@ public class Game {
 		visibleHeight = cam.viewportHeight*cam.zoom;
 		
 		font.getData().setScale(cam.zoom);
-		font.draw(batch, Integer.toString(player.foodEaten), (float)((0-((desiredZoom*1280-1280)/2))+(0.03*visibleWidth)), (float)((0-((desiredZoom*720-720)/2))+(0.95*visibleHeight)));
+		font.draw(batch, "Food eaten: " + Integer.toString(player.foodEaten), (float)((0-((desiredZoom*1280-1280)/2))+(0.03*visibleWidth)), (float)((0-((desiredZoom*720-720)/2))+(0.95*visibleHeight)));
 		
 		/*
 		 * For adding more zooming states:
@@ -151,7 +151,7 @@ public class Game {
 				desiredZoom = 10;
 				desiredWidth = lastWidth*10;
 				desiredHeight = lastHeight*10;
-			} else if(player.foodEaten >= 15) {
+			} else if(player.foodEaten >= 9) {
 				desiredZoom = 5;
 				desiredWidth = lastWidth*5;
 				desiredHeight = lastHeight*5;
