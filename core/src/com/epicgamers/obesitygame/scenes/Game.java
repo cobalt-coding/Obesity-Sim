@@ -138,7 +138,8 @@ public class Game {
 		visibleWidth = cam.viewportWidth*cam.zoom;
 		visibleHeight = cam.viewportHeight*cam.zoom;
 		
-		font.draw(batch, Integer.toString(player.foodEaten), (float)((0-((desiredZoom*1280-1280)/2))+(0.05*visibleWidth)), (float)((0-((desiredZoom*720-720)/2))+(0.95*visibleHeight)));
+		font.getData().setScale(cam.zoom);
+		font.draw(batch, Integer.toString(player.foodEaten), (float)((0-((desiredZoom*1280-1280)/2))+(0.03*visibleWidth)), (float)((0-((desiredZoom*720-720)/2))+(0.95*visibleHeight)));
 		
 		/*
 		 * For adding more zooming states:
