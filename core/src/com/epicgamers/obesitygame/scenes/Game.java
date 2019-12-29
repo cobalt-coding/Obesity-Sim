@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 //import com.badlogic.gdx.graphics.Texture;
@@ -24,6 +25,7 @@ public class Game {
 	private Array<Edible> food;
 	BitmapFont font;
 	private Array<Graphic> graphics;
+	private Sound eatSound;
 	
 	boolean zooming = false;
 	
@@ -65,6 +67,7 @@ public class Game {
 		food = new Array<Edible>();
 		
 		graphics = new Array<Graphic>();
+		eatSound = Gdx.audio.newSound(Gdx.files.internal("nom.mp3"));
 		
 		/*
 		 * camera = new OrthographicCamera(30, 20 * (Gdx.graphics.getWidth() /
@@ -127,6 +130,7 @@ public class Game {
 			edible.render(batch);
 			if (player.colliding(edible.getRect())) {
 				if(edible.foodValReq <= player.foodEaten) {
+					eatSound.play();
 					player.time = 0;
 					player.foodEaten+=edible.foodValue;
 					player.eating = true;
