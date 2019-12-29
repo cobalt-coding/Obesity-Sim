@@ -5,6 +5,7 @@ public class SceneEnum {
 	public enum Scene{
 		TITLE,
 		GAME,
-		PAUSE
+		PAUSE,
+		CREDITS
 	}
 }

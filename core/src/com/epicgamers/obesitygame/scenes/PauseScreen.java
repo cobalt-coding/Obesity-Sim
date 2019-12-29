@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.epicgamers.obesitygame.scenes.SceneEnum.Scene;
 
 public class PauseScreen {
@@ -57,8 +55,7 @@ public class PauseScreen {
 				if(320 < mouseX && mouseX < 950 && 140 < mouseY && mouseY < 240) {
 					return Scene.GAME;
 				} else if(320 < mouseX && mouseX < 950 && 320 < mouseY && mouseY < 420) {
-					//Options menu here
-					System.out.println("Options menu will open here...?");
+					return Scene.CREDITS;
 				} else if(320 < mouseX && mouseX < 950 && 480 < mouseY && mouseY < 580) {
 					return Scene.TITLE;
 				}
@@ -69,7 +66,7 @@ public class PauseScreen {
 			batch.draw(pause, 0, 0, 1280, 720);
 			batch.draw(menuImage, 217, 9, 47*18, 39*18);
 			font.draw(batch, "Restart", 530, 215);
-			font.draw(batch, "Options", 530, 380);
+			font.draw(batch, "Credits", 530, 380);
 			font.draw(batch, "Resume", 530, 555);
 			
 			//Conditional returning scene to change
