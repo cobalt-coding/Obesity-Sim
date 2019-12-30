@@ -7,9 +7,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 //import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Array;
 //import com.epicgamers.obesitygame.MainGame;
@@ -47,6 +50,15 @@ public class Game {
 	final int centerOfScreenX = 1280/2;
 	final int centerOfScreenY = 720/2;
 	
+	private boolean displayEat = false;
+	private boolean allowEat = true;
+	private float[] eatCoords = {0f, 0f};
+	private static final int FRAME_COLS = 1, FRAME_ROWS = 2;
+	Animation<TextureRegion> eatButton;
+	Texture eatSheet;
+	
+	float stateTime;
+	
 	private String[] graphicLayout = new String[] {
 		"                    ",
 		"                    ",
@@ -67,6 +79,21 @@ public class Game {
 		player = new Player(100, 100);
 		food = new Array<Edible>();
 		
+		eatSheet = new Texture(Gdx.files.internal("eatsheet.png"));
+		TextureRegion[][] tmp = TextureRegion.split(eatSheet, eatSheet.getWidth()/FRAME_COLS, eatSheet.getHeight()/FRAME_ROWS);
+		
+		TextureRegion[] eatFrames = new TextureRegion[FRAME_COLS*FRAME_ROWS];
+		int index = 0;
+		for (int i = 0 ; i < FRAME_ROWS ; i++) {
+			for (int j = 0 ; j < FRAME_COLS ; j++) {
+				eatFrames[index++] = tmp[i][j];
+			}
+		}
+		
+		eatButton = new Animation<TextureRegion>(0.5f, eatFrames);
+		
+		stateTime = 0f;
+		
 		graphics = new Array<Graphic>();
 		eatSound = Gdx.audio.newSound(Gdx.files.internal("nom.mp3"));
 		
@@ -76,12 +103,12 @@ public class Game {
 		 * camera.viewportHeight / 2f, 0); camera.update();
 		 */
 		
-		int index = 0;
+		int indexx = 0;
 		for (String row : graphicLayout) {
 			for (int i = 0 ; i < row.length() ; i++) {
-				graphics.add(new Graphic(i*64, index*64, 32, 32, 2, "wood.png"));
+				graphics.add(new Graphic(i*64, indexx*64, 32, 32, 2, "wood.png"));
 			}
-			index++;
+			indexx++;
 		}
 		
 		//First screen
@@ -108,6 +135,9 @@ public class Game {
 		Gdx.gl.glClearColor(210/255f, 248/255f, 252/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		stateTime+=Gdx.graphics.getDeltaTime();
+		TextureRegion currentFrame = eatButton.getKeyFrame(stateTime, true);
+		
 		for (Graphic graphic : graphics) {
 			graphic.render(batch);
 		}
@@ -131,14 +161,24 @@ public class Game {
 			edible.render(batch, shape);
 			if (player.colliding(edible.getRect())) {
 				if(edible.foodValReq <= player.foodEaten) {
-					eatSound.play();
-					player.time = 0;
-					player.foodEaten+=edible.foodValue;
-					player.eating = true;
-					iter.remove();
+					displayEat = true;
+					eatCoords[0] = edible.getRect().getX();
+					eatCoords[1] = edible.getRect().getY();
+					if (Gdx.input.isKeyPressed(Input.Keys.Z) && allowEat) {
+						eatSound.play();
+						player.time = 0;
+						player.foodEaten+=edible.foodValue;
+						player.eating = true;
+						iter.remove();
+						allowEat = false;
+						break;
+					}
 				}
 			}
 		}
+		
+		if (!Gdx.input.isKeyPressed(Input.Keys.Z))
+			allowEat = true;
 		
 		visibleWidth = cam.viewportWidth*cam.zoom;
 		visibleHeight = cam.viewportHeight*cam.zoom;
@@ -146,6 +186,10 @@ public class Game {
 		font.getData().setScale(cam.zoom);
 		font.draw(batch, "Food eaten: " + Integer.toString(player.foodEaten), (float)((0-((desiredZoom*1280-1280)/2))+(0.03*visibleWidth)), (float)((0-((desiredZoom*720-720)/2))+(0.95*visibleHeight)));
 		
+		if (displayEat) {
+			batch.draw(currentFrame, eatCoords[0], eatCoords[1]);
+			displayEat = false;
+		}
 		/*
 		 * For adding more zooming states:
 		 * -copy the format with desired zoom, width, and height and it will transition smoothly by itself
